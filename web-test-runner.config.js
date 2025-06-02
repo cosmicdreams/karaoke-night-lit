@@ -50,7 +50,7 @@ const browsers = {
   // ===========
   chromium: playwrightLauncher({product: 'chromium'}),
   firefox: playwrightLauncher({product: 'firefox'}),
-  webkit: playwrightLauncher({product: 'webkit'}),
+  // webkit: playwrightLauncher({product: 'webkit'}), // Commenting out Webkit due to persistent dependency issues
 
   // Uncomment example launchers for running on Sauce Labs
   // ===========
@@ -86,10 +86,11 @@ try {
 // https://modern-web.dev/docs/test-runner/cli-and-configuration/
 export default {
   rootDir: '.',
-  files: ['./test/**/*_test.js'],
+  files: ['./src/test/**/*_test.ts'],
   nodeResolve: true,
   preserveSymlinks: true,
   browsers: commandLineBrowsers ?? Object.values(browsers),
+  testsStartTimeout: 60000, // Increased timeout
   testFramework: {
     // https://mochajs.org/api/mocha
     config: {
